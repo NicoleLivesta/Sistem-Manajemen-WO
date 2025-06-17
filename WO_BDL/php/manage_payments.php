@@ -20,24 +20,31 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Event ID</th>
-                    <th>Amount</th>
+                    <th>Client</th>
+                    <th>Payment Date</th>
+                    <th>Method</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $stmt = $pdo->query("SELECT * FROM pembayaran");
+                $stmt = $pdo->query("
+                    SELECT pembayaran.*, klien.nama_klien
+                    FROM pembayaran
+                    JOIN klien ON pembayaran.id_klien = klien.id_klien
+                ");
+
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     echo "<tr>
-                        <td>{$row['id']}</td>
-                        <td>{$row['event_id']}</td>
-                        <td>{$row['amount']}</td>
+                        <td>{$row['id_pembayaran']}</td>
+                        <td>{$row['nama_klien']}</td>
+                        <td>{$row['tanggal']}</td>
+                        <td>{$row['metode']}</td>
                         <td>{$row['status']}</td>
                         <td>
-                            <a href='edit_payment.php?id={$row['id']}'>Edit</a>
-                            <a href='delete_payment.php?id={$row['id']}'>Delete</a>
+                            <a href='edit_payment.php?id={$row['id_pembayaran']}'>Edit</a>
+                            <a href='delete_payment.php?id={$row['id_pembayaran']}'>Delete</a>
                         </td>
                     </tr>";
                 }

@@ -15,7 +15,7 @@
         </nav>
     </header>
     <main>
-        <h2>Service Package List</h2>
+        <h2>Booking List</h2>
         <table>
             <thead>
                 <tr>
